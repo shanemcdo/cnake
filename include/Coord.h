@@ -7,6 +7,7 @@ typedef struct{
 } Coord;
 
 Coord new_coord(int x, int y);
+void print_coord(Coord coord);
 
 #endif
 

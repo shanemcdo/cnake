@@ -11,5 +11,6 @@ typedef struct _Node{
 } Node;
 
 Node new_node(Coord val, Node* next,  Node* prev);
+Node* new_node_ptr(Coord val, Node* next,  Node* prev);
 
 #endif // NODE_H
