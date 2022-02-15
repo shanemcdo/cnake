@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include"Deque.h"
+#include"constants.h"
 #include"term.h"
 
 int main(){
@@ -15,5 +16,11 @@ int main(){
     printf("\n");
     deque_print(&d);
     deque_print(&d);
+    printf("%s%s%s%s",
+        R_FRUIT,
+        R_HEAD,
+        R_TAIL,
+        RESET
+    );
     return 0;
 }
