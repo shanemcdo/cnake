@@ -11,3 +11,7 @@ Coord new_coord(int x, int y){
 void print_coord(Coord coord){
     printf("Coord(x=%d, y=%d)", coord.x, coord.y);
 }
+
+bool coord_equals(Coord a, Coord b){
+    return a.x == b.x && a.y == b.y;
+}
