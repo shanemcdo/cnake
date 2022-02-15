@@ -9,6 +9,6 @@ void set_cooked(); // buffered input
 void clear(); // clear the screen
 // screen coord -> game coord
 //       x, y   ->  2 * x - 1, y
-void put_block(Coord pos, const char* color, const char* representation); // print a block in game coordinates
+void put_block(Coord pos, const char* block); // print a block in game coordinates
 
 #endif // ifndef TERM_T
