@@ -19,6 +19,7 @@ int length_to_add;
 bool running;
 Direction current_direction;
 Coord fruit;
+int score;
 
 void get_new_fruit(){
     const int capacity = BOARD_SIZE * BOARD_SIZE;
@@ -125,6 +126,7 @@ void update(){
     }
     if(coord_equals(snake.head->val, fruit)){
         length_to_add += TAIL_INC;
+        score++;
         get_new_fruit();
     }
     deque_push_front(&snake, new_head);
@@ -135,7 +137,7 @@ void update(){
     }
 }
 
-void start(){
+int start(){
     draw_box();
     snake = new_deque();
     deque_push_front(&snake, new_coord(BOARD_SIZE / 2, BOARD_SIZE / 2));
@@ -143,6 +145,7 @@ void start(){
     running = true;
     current_direction = UP;
     get_new_fruit();
+    score = 0;
     while(running){
         kbin();
         update();
@@ -150,4 +153,5 @@ void start(){
         refresh();
         usleep(SLEEP_INTERVAL);
     }
+    return score;
 }

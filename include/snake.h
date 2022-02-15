@@ -1,7 +1,7 @@
 #ifndef SNAKE_H
 #define SNAKE_H
 
-void start();
+int start();
 
 #endif // ifndef SNAKE_H
 

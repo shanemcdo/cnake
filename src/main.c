@@ -18,7 +18,8 @@ int main(){
         printf("\033[31mERROR:\033[0m Terminal too small!\n");
         return 1;
     }
-    start(); // play the game
+    int score = start(); // play the game
     endwin(); // close window
+    printf("You ate %d peices of fruit!\n", score);
     return 0;
 }
