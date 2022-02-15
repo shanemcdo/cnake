@@ -10,13 +10,5 @@
 #define R_FRUIT "\033[31m▝▘"
 #define RESET "\033[0;0m"
 
-// box surround pieces
-#define R_DR_CORNER "╔"
-#define R_DL_CORNER "╗"
-#define R_UR_CORNER "╚"
-#define R_UL_CORNER "╝"
-#define R_VERT_LINE "║"
-#define R_HORIZ_LINE "═"
-
 #endif // ifndef CONSTANTS_H
 
