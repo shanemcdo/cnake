@@ -18,6 +18,28 @@ int length_to_add;
 bool running;
 Direction current_direction;
 
+void draw_box(){
+    addch(ACS_ULCORNER);
+    for(int i = 0; i < BOARD_SIZE * 2; i++){
+        addch(ACS_HLINE);
+    }
+    addch(ACS_URCORNER);
+    addch('\n')
+    for(int y = 0; y < BOARD_SIZE; y++){
+        addch(ACS_VLINE);
+        for(int x = 0; x < BOARD_SIZE; x++){
+            printw(R_EMPTY);
+        }
+        addch(ACS_VLINE);
+        addch('\n');
+    }
+    addch(ACS_LLCORNER);
+    for(int i = 0; i < BOARD_SIZE * 2; i++){
+        addch(ACS_HLINE);
+    }
+    addch(ACS_LRCORNER);
+}
+
 void kbin(){
     int ch = getch();
     switch(ch){
@@ -51,10 +73,6 @@ void draw(){
     if(snake.head->next != NULL){
         put_block(snake.head->next->val, R_TAIL);
     }
-}
-
-void erase_end_of_tail(){
-    put_block(snake.tail->val, R_EMPTY);
 }
 
 void update(){
@@ -91,6 +109,7 @@ void update(){
 }
 
 void start(){
+    draw_box();
     snake = new_deque();
     deque_push_front(&snake, new_coord(BOARD_SIZE / 2, BOARD_SIZE / 2));
     length_to_add = 3;
