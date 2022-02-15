@@ -15,10 +15,6 @@ void set_cooked(){ // buffered input
     system("/bin/stty cooked"); // buffer all input
 }
 
-void clear(){ // clear the screen
-    system("clear");
-}
-
 // screen coord -> game coord
 //       x, y   ->  2 * x - 1, y
 void put_block(Coord pos, const char* block){ // print a block in game coordinates

@@ -3,10 +3,11 @@
 #include"ncurses.h"
 
 int main(){
-    initscr();
-    nodelay(stdscr, TRUE);
-    noecho();
+    initscr(); // create window
+    curs_set(0); // hide cursor
+    nodelay(stdscr, TRUE); // non-blocking getch
+    noecho(); // don't print to output
     start();
-    endwin();
+    endwin(); // close window
     return 0;
 }

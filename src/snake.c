@@ -1,7 +1,8 @@
+#include<curses.h>
 #include<unistd.h>
 #include"constants.h"
 #include"Deque.h"
-#include"ncurses.h"
+#include"term.h"
 
 Deque snake;
 int length_to_add;
@@ -21,6 +22,7 @@ void start(){
     running = true;
     while(running){
         kbin();
+        refresh();
         usleep(100);
     }
 }
