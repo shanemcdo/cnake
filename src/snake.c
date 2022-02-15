@@ -1,3 +1,4 @@
+#include<unistd.h>
 #include"constants.h"
 #include"Deque.h"
 #include"ncurses.h"
@@ -7,7 +8,10 @@ int length_to_add;
 bool running;
 
 void kbin(){
-    putchar(getch());
+    int ch = getch();
+    if(ch == EOF){
+        return;
+    }
 }
 
 void start(){
@@ -17,5 +21,6 @@ void start(){
     running = true;
     while(running){
         kbin();
+        usleep(100);
     }
 }

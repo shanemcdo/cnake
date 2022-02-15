@@ -5,6 +5,7 @@
 int main(){
     initscr();
     nodelay(stdscr, TRUE);
+    noecho();
     start();
     endwin();
     return 0;
