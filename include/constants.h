@@ -10,5 +10,7 @@
 #define R_FRUIT "\033[31m▝▘"
 #define RESET "\033[0;0m"
 
+#define TAIL_INC 3
+
 #endif // ifndef CONSTANTS_H
 

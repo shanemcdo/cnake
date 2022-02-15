@@ -1,4 +1,5 @@
 #include<curses.h>
+#include<stdlib.h>
 #include<unistd.h>
 #include"constants.h"
 #include"Deque.h"
@@ -17,6 +18,24 @@ Deque snake;
 int length_to_add;
 bool running;
 Direction current_direction;
+Coord fruit;
+
+void get_new_fruit(){
+    const int capacity = BOARD_SIZE * BOARD_SIZE;
+    Coord open_positions[BOARD_SIZE * BOARD_SIZE];
+    int size;
+    for(int y = 1; y <= BOARD_SIZE && size < capacity; y++){
+        for(int x = 1; x <= BOARD_SIZE && size < capacity; x++){
+            Coord c = new_coord(x, y);
+            if(!deque_contains(&snake, c)){
+                open_positions[size++] = c;
+            }
+        }
+    }
+    int random_index = rand() % size;
+    fruit = open_positions[random_index];
+}
+
 
 void draw_box(){
     addch(ACS_ULCORNER);
@@ -69,6 +88,9 @@ void kbin(){
 }
 
 void draw(){
+    // fruit
+    put_block(fruit, R_FRUIT);
+    // snake
     put_block(snake.head->val, R_HEAD);
     if(snake.head->next != NULL){
         put_block(snake.head->next->val, R_TAIL);
@@ -101,6 +123,10 @@ void update(){
         running = false;
         return;
     }
+    if(coord_equals(snake.head->val, fruit)){
+        length_to_add += TAIL_INC;
+        get_new_fruit();
+    }
     deque_push_front(&snake, new_head);
     if(length_to_add > 0){
         length_to_add--;
@@ -116,6 +142,7 @@ void start(){
     length_to_add = 3;
     running = true;
     current_direction = UP;
+    get_new_fruit();
     while(running){
         kbin();
         update();
