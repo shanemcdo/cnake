@@ -7,7 +7,7 @@ int main(){
     curs_set(0); // hide cursor
     nodelay(stdscr, TRUE); // non-blocking getch
     noecho(); // don't print to output
-    start();
+    start(); // play the game
     endwin(); // close window
     return 0;
 }

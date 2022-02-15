@@ -10,9 +10,11 @@ bool running;
 
 void kbin(){
     int ch = getch();
-    if(ch == EOF){
+    if(ch == EOF){ // no input
         return;
     }
+    putchar(ch);
+    refresh();
 }
 
 void start(){
@@ -23,6 +25,6 @@ void start(){
     while(running){
         kbin();
         refresh();
-        usleep(100);
+        usleep(50000); // wait 0.05 seconds
     }
 }
