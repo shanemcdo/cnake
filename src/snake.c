@@ -24,7 +24,7 @@ void draw_box(){
         addch(ACS_HLINE);
     }
     addch(ACS_URCORNER);
-    addch('\n')
+    addch('\n');
     for(int y = 0; y < BOARD_SIZE; y++){
         addch(ACS_VLINE);
         for(int x = 0; x < BOARD_SIZE; x++){
