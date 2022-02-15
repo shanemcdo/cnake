@@ -148,6 +148,6 @@ void start(){
         update();
         draw();
         refresh();
-        usleep(50000); // wait 0.05 seconds
+        usleep(SLEEP_INTERVAL);
     }
 }

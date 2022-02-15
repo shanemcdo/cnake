@@ -2,6 +2,8 @@
 #define CONSTANTS_H
 
 #define BOARD_SIZE 40
+#define TAIL_INC 3
+#define SLEEP_INTERVAL 100000 // 0.1 seconds
 
 // piece representations
 #define R_EMPTY "  "
@@ -10,7 +12,6 @@
 #define R_FRUIT "\033[31m▝▘"
 #define RESET "\033[0;0m"
 
-#define TAIL_INC 3
 
 #endif // ifndef CONSTANTS_H
 
