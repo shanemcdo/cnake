@@ -13,3 +13,7 @@ void set_raw(){ // unbuffered input
 void set_cooked(){ // buffered input
     system("/bin/stty cooked"); // buffer all input
 }
+
+void clear(){ // clear the screen
+    system("clear");
+}
