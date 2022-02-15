@@ -38,8 +38,13 @@ void get_new_fruit(){
     fruit = open_positions[random_index];
 }
 
+void update_score(){
+    move(0, 0);
+    printw("Score: %d\n", score);
+}
 
 void draw_box(){
+    update_score();
     addch(ACS_ULCORNER);
     for(int i = 0; i < BOARD_SIZE * 2; i++){
         addch(ACS_HLINE);
@@ -148,6 +153,7 @@ void update(){
     if(coord_equals(snake.head->val, fruit)){
         length_to_add += TAIL_INC;
         score++;
+        update_score();
         get_new_fruit();
     }
     deque_push_front(&snake, new_head);
