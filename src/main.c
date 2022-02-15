@@ -1,10 +1,11 @@
 #include<stdio.h>
 #include"snake.h"
-#include"term.h"
+#include"ncurses.h"
 
 int main(){
-    set_raw(); // unbuffering io
+    initscr();
+    nodelay(stdscr, TRUE);
     start();
-    set_cooked(); // buffering io
+    endwin();
     return 0;
 }

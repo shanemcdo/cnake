@@ -3,7 +3,7 @@ CC=clang#c compiler
 EXTENSION=.c#c extension
 TARGET=bin/test#the output file
 DBG_TARGET=$(TARGET).debug
-FLAGS=-Wall -Iinclude#flags to be passed to compiler
+FLAGS=-Wall -Iinclude $(shell pkg-config --cflags --libs ncurses)#flags to be passed to compiler
 DBG_FLAGS=-g#flags for debugging
 DEBUGGER=lldb#debugger to use
 ifeq ("$(wildcard src/*$(EXTENSION))", "")#if there are no c files

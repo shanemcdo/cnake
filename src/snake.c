@@ -1,10 +1,14 @@
 #include"constants.h"
 #include"Deque.h"
-#include"term.h"
+#include"ncurses.h"
 
 Deque snake;
 int length_to_add;
 bool running;
+
+void kbin(){
+    putchar(getch());
+}
 
 void start(){
     snake = new_deque();
@@ -12,5 +16,6 @@ void start(){
     length_to_add = 3;
     running = true;
     while(running){
+        kbin();
     }
 }
