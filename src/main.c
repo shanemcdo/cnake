@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 #include"Deque.h"
 #include"term.h"
 
@@ -15,5 +16,8 @@ int main(){
     printf("\n");
     deque_print(&d);
     deque_print(&d);
+    system("/bin/stty raw"); // allow unbuffered input
+    getchar();
+    system("/bin/stty cooked"); // buffer all input
     return 0;
 }
