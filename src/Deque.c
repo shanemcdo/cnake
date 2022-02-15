@@ -82,3 +82,14 @@ void deque_print(Deque* deque){
     }
     printf("\n");
 }
+
+bool deque_contains(Deque* deque, Coord coord){
+    Node* current = deque-> head;
+    while(current != NULL){
+        if(coord_equals(current->val, coord)){
+            return true;
+        }
+        current = current-> next;
+    }
+    return false;
+}

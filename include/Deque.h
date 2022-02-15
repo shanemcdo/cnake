@@ -17,5 +17,6 @@ Coord deque_pop_back(Deque* deque);
 bool deque_is_empty(Deque* deque);
 unsigned deque_length(Deque* deque);
 void deque_print(Deque* deque);
+bool deque_contains(Deque* deque, Coord coord);
 
 #endif // DEQUE_H
