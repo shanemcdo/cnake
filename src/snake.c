@@ -20,6 +20,7 @@ bool running;
 Direction current_direction;
 Coord fruit;
 int score;
+bool paused;
 
 void get_new_fruit(){
     const int capacity = BOARD_SIZE * BOARD_SIZE;
@@ -62,29 +63,49 @@ void draw_box(){
 
 void kbin(){
     int ch = getch();
-    switch(ch){
-        case EOF: // no input
-            return;
-        case 'w':
-            if(current_direction != DOWN){
-                current_direction = UP;
-            }
-            break;
-        case 'a':
-            if(current_direction != RIGHT){
-                current_direction = LEFT;
-            }
-            break;
-        case 's':
-            if(current_direction != UP){
-                current_direction = DOWN;
-            }
-            break;
-        case 'd':
-            if(current_direction != LEFT){
-                current_direction = RIGHT;
-            }
-            break;
+    if(ch == 'p'){
+        paused = !paused;
+    }
+    if(ch == EOF){
+        return;
+    }
+    if(paused){
+        switch(ch){
+            case 'q':
+                running = false;
+                break;
+            case 'p':
+                put_block(PAUSE_MENU_POS, PAUSE_MENU_TEXT);
+                refresh();
+                break;
+        }
+    }else{
+        switch(ch){
+            case 'p':
+                put_block(PAUSE_MENU_POS, PAUSE_MENU_EMPTY);
+                refresh();
+                break;
+            case 'w':
+                if(current_direction != DOWN){
+                    current_direction = UP;
+                }
+                break;
+            case 'a':
+                if(current_direction != RIGHT){
+                    current_direction = LEFT;
+                }
+                break;
+            case 's':
+                if(current_direction != UP){
+                    current_direction = DOWN;
+                }
+                break;
+            case 'd':
+                if(current_direction != LEFT){
+                    current_direction = RIGHT;
+                }
+                break;
+        }
     }
 }
 
@@ -146,11 +167,14 @@ int start(){
     current_direction = UP;
     get_new_fruit();
     score = 0;
+    paused = false;
     while(running){
         kbin();
-        update();
-        draw();
-        refresh();
+        if(!paused){
+            update();
+            draw();
+            refresh();
+        }
         usleep(SLEEP_INTERVAL);
     }
     return score;

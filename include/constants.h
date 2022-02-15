@@ -12,6 +12,9 @@
 #define R_FRUIT "\033[31m▝▘"
 #define RESET "\033[0;0m"
 
+#define PAUSE_MENU_TEXT "PAUSED"
+#define PAUSE_MENU_EMPTY "      "
+#define PAUSE_MENU_POS new_coord(BOARD_SIZE / 2, BOARD_SIZE / 2)
 
 #endif // ifndef CONSTANTS_H
 
