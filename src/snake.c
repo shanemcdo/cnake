@@ -95,7 +95,8 @@ void update(){
         new_head.x <= 0 ||
         new_head.y <= 0 ||
         new_head.x > BOARD_SIZE ||
-        new_head.y > BOARD_SIZE
+        new_head.y > BOARD_SIZE ||
+        deque_contains(&snake, new_head)
     ){
         running = false;
         return;
