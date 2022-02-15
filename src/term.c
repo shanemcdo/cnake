@@ -17,3 +17,10 @@ void set_cooked(){ // buffered input
 void clear(){ // clear the screen
     system("clear");
 }
+
+// screen coord -> game coord
+//       x, y   ->  2 * x - 1, y
+void put_block(Coord pos, const char* color, const char* representation){ // print a block in game coordinates
+    move_to(2 * pos.x - 1, pos.y);
+    printf("%s%s", color, representation);
+}
