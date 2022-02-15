@@ -23,7 +23,7 @@ Coord fruit;
 void get_new_fruit(){
     const int capacity = BOARD_SIZE * BOARD_SIZE;
     Coord open_positions[BOARD_SIZE * BOARD_SIZE];
-    int size;
+    int size = 0;
     for(int y = 1; y <= BOARD_SIZE && size < capacity; y++){
         for(int x = 1; x <= BOARD_SIZE && size < capacity; x++){
             Coord c = new_coord(x, y);
