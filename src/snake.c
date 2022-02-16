@@ -21,13 +21,14 @@ static Direction current_direction;
 static Coord fruit;
 static int score;
 static bool paused;
+static Coord board_size;
 
 static void get_new_fruit(){
-    const int capacity = BOARD_SIZE * BOARD_SIZE;
-    Coord open_positions[BOARD_SIZE * BOARD_SIZE];
+    int capacity = board_size.x * board_size.y;
+    Coord open_positions[capacity];
     int size = 0;
-    for(int y = 1; y <= BOARD_SIZE && size < capacity; y++){
-        for(int x = 1; x <= BOARD_SIZE && size < capacity; x++){
+    for(int y = 1; y <= board_size.y && size < capacity; y++){
+        for(int x = 1; x <= board_size.y && size < capacity; x++){
             Coord c = new_coord(x, y);
             if(!deque_contains(&snake, c)){
                 open_positions[size++] = c;
@@ -46,21 +47,21 @@ static void update_score(){
 static void draw_box(){
     update_score();
     addch(ACS_ULCORNER);
-    for(int i = 0; i < BOARD_SIZE * 2; i++){
+    for(int i = 0; i < board_size.x * 2; i++){
         addch(ACS_HLINE);
     }
     addch(ACS_URCORNER);
     addch('\n');
-    for(int y = 0; y < BOARD_SIZE; y++){
+    for(int y = 0; y < board_size.y; y++){
         addch(ACS_VLINE);
-        for(int x = 0; x < BOARD_SIZE; x++){
+        for(int x = 0; x < board_size.x; x++){
             printw(R_EMPTY);
         }
         addch(ACS_VLINE);
         addch('\n');
     }
     addch(ACS_LLCORNER);
-    for(int i = 0; i < BOARD_SIZE * 2; i++){
+    for(int i = 0; i < board_size.x * 2; i++){
         addch(ACS_HLINE);
     }
     addch(ACS_LRCORNER);
@@ -143,8 +144,8 @@ static void update(){
     if(
         new_head.x <= 0 ||
         new_head.y <= 0 ||
-        new_head.x > BOARD_SIZE ||
-        new_head.y > BOARD_SIZE ||
+        new_head.x > board_size.x ||
+        new_head.y > board_size.y ||
         deque_contains(&snake, new_head)
     ){
         running = false;
@@ -165,15 +166,18 @@ static void update(){
 }
 
 int start(){
-    draw_box();
+    int max_x, max_y;
+    getmaxyx(stdscr, max_y, max_x);
+    board_size = new_coord((max_x - 3) / 2, max_y - 3);
     snake = new_deque();
-    deque_push_front(&snake, new_coord(BOARD_SIZE / 2, BOARD_SIZE / 2));
     length_to_add = 3;
     running = true;
     current_direction = UP;
     get_new_fruit();
     score = 0;
     paused = false;
+    draw_box();
+    deque_push_front(&snake, new_coord(board_size.x / 2, board_size.y / 2));
     while(running){
         kbin();
         if(!paused){

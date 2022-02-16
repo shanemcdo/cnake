@@ -1,7 +1,7 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-#define BOARD_SIZE 40
+#define BOARD_SIZE_MIN 10
 #define TAIL_INC 3
 #define SLEEP_INTERVAL 100000 // 0.1 seconds
 
@@ -14,7 +14,7 @@
 
 #define PAUSE_MENU_TEXT "PAUSED"
 #define PAUSE_MENU_EMPTY "      "
-#define PAUSE_MENU_POS new_coord(BOARD_SIZE / 2, BOARD_SIZE / 2)
+#define PAUSE_MENU_POS new_coord(BOARD_SIZE_MIN / 2, BOARD_SIZE_MIN / 2)
 
 #endif // ifndef CONSTANTS_H
 

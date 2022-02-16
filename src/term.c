@@ -16,7 +16,7 @@ void set_cooked(){ // buffered input
 }
 
 // screen coord -> game coord
-//       x, y   ->  2 * x, y + 1
+//       x, y   ->  2 * x, y + 2
 void put_block(Coord pos, const char* block){ // print a block in game coordinates
     move_to(2 * pos.x, pos.y + 2);
     printf("%s%s", block, RESET);

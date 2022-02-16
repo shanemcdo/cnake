@@ -13,7 +13,7 @@ int main(){
     noecho(); // don't print to output
     int max_x, max_y;
     getmaxyx(stdscr, max_y, max_x);
-    if(max_x < BOARD_SIZE * 2 + 3 || max_y < BOARD_SIZE + 3){
+    if(max_x < BOARD_SIZE_MIN * 2 + 3 || max_y < BOARD_SIZE_MIN + 3){
         endwin();
         printf("\033[31mERROR:\033[0m Terminal too small!\n");
         return 1;
