@@ -14,15 +14,15 @@ typedef enum{
 
 #define DIRECTION_BUFFER_SIZE 4
 
-Deque snake;
-int length_to_add;
-bool running;
-Direction current_direction;
-Coord fruit;
-int score;
-bool paused;
+static Deque snake;
+static int length_to_add;
+static bool running;
+static Direction current_direction;
+static Coord fruit;
+static int score;
+static bool paused;
 
-void get_new_fruit(){
+static void get_new_fruit(){
     const int capacity = BOARD_SIZE * BOARD_SIZE;
     Coord open_positions[BOARD_SIZE * BOARD_SIZE];
     int size = 0;
@@ -38,12 +38,12 @@ void get_new_fruit(){
     fruit = open_positions[random_index];
 }
 
-void update_score(){
+static void update_score(){
     move(0, 0);
     printw("Score: %d\n", score);
 }
 
-void draw_box(){
+static void draw_box(){
     update_score();
     addch(ACS_ULCORNER);
     for(int i = 0; i < BOARD_SIZE * 2; i++){
@@ -66,7 +66,7 @@ void draw_box(){
     addch(ACS_LRCORNER);
 }
 
-void kbin(){
+static void kbin(){
     int ch = getch();
     if(ch == 'p'){
         paused = !paused;
@@ -114,7 +114,7 @@ void kbin(){
     }
 }
 
-void draw(){
+static void draw(){
     // fruit
     put_block(fruit, R_FRUIT);
     // snake
@@ -124,7 +124,7 @@ void draw(){
     }
 }
 
-void update(){
+static void update(){
     Coord new_head = new_coord(snake.head->val.x, snake.head->val.y);
     switch(current_direction){
         case UP:
