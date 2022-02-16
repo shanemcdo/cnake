@@ -22,10 +22,11 @@ static Coord fruit;
 static int score;
 static bool paused;
 static Coord board_size;
+static Coord pause_menu_pos;
 
 static void get_new_fruit(){
     int capacity = board_size.x * board_size.y;
-    Coord open_positions[capacity];
+    Coord *open_positions = malloc(sizeof(Coord) * capacity);
     int size = 0;
     for(int y = 1; y <= board_size.y && size < capacity; y++){
         for(int x = 1; x <= board_size.y && size < capacity; x++){
@@ -37,6 +38,7 @@ static void get_new_fruit(){
     }
     int random_index = rand() % size;
     fruit = open_positions[random_index];
+    free(open_positions);
 }
 
 static void update_score(){
@@ -81,14 +83,14 @@ static void kbin(){
                 running = false;
                 break;
             case 'p':
-                put_block(PAUSE_MENU_POS, PAUSE_MENU_TEXT);
+                put_block(pause_menu_pos, PAUSE_MENU_TEXT);
                 refresh();
                 break;
         }
     }else{
         switch(ch){
             case 'p':
-                put_block(PAUSE_MENU_POS, PAUSE_MENU_EMPTY);
+                put_block(pause_menu_pos, PAUSE_MENU_EMPTY);
                 refresh();
                 break;
             case 'w':
@@ -169,6 +171,7 @@ int start(){
     int max_x, max_y;
     getmaxyx(stdscr, max_y, max_x);
     board_size = new_coord((max_x - 3) / 2, max_y - 3);
+    pause_menu_pos = new_coord(board_size.x / 2, board_size.y / 2);
     snake = new_deque();
     length_to_add = 3;
     running = true;

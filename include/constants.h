@@ -14,7 +14,6 @@
 
 #define PAUSE_MENU_TEXT "PAUSED"
 #define PAUSE_MENU_EMPTY "      "
-#define PAUSE_MENU_POS new_coord(BOARD_SIZE_MIN / 2, BOARD_SIZE_MIN / 2)
 
 #endif // ifndef CONSTANTS_H
 
