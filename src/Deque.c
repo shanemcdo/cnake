@@ -11,7 +11,7 @@ Deque new_deque(){
 
 void deque_push_front(Deque* deque, Coord val){
     Node* new = new_node_ptr(val, deque->head, NULL);
-    if(deque->head == NULL){
+    if(deque_is_empty(deque)){
         deque->head = new;
         deque->tail = new;
     }else{
@@ -22,7 +22,7 @@ void deque_push_front(Deque* deque, Coord val){
 
 void deque_push_back(Deque* deque, Coord val){
     Node* new = new_node_ptr(val, NULL, deque->tail);
-    if(deque->head == NULL){
+    if(deque_is_empty(deque)){
         deque->head = new;
         deque->tail = new;
     }else{
@@ -32,6 +32,9 @@ void deque_push_back(Deque* deque, Coord val){
 }
 
 Coord deque_pop_front(Deque* deque){
+    if(deque_is_empty(deque)){
+        // TODO empty edge case
+    }
     Node* to_remove = deque->head;
     deque->head = deque->head->next;
     if(deque->head == NULL){
@@ -45,6 +48,9 @@ Coord deque_pop_front(Deque* deque){
 }
 
 Coord deque_pop_back(Deque* deque){
+    if(deque_is_empty(deque)){
+        // TODO empty edge case
+    }
     Node* to_remove = deque->tail;
     deque->tail = deque->tail->prev;
     if(deque->tail == NULL){
