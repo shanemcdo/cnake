@@ -30,6 +30,9 @@ clean:# remove contents of bin
 bin:# create folder bin
 	mkdir bin
 
+release: clean
+	make TARGET=bin/cnake
+
 test: all# compile everything then run executible
 	$(TARGET)
 
@@ -43,4 +46,4 @@ $(DBG_TARGET): $(DBG_OBJECTS)# create debug executable
 bin/%.o.debug: src/%$(EXTENSION) $(INCLUDES) bin# create debug object file for %
 	$(CC) $< $(CFLAGS) $(DBG_FLAGS) -c -o $@
 
-.PHONY: all clean test debug
+.PHONY: all clean test debug release
