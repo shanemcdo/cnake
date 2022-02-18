@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<assert.h>
 #include"Deque.h"
 
 Deque new_deque(){
@@ -32,9 +33,7 @@ void deque_push_back(Deque* deque, Coord val){
 }
 
 Coord deque_pop_front(Deque* deque){
-    if(deque_is_empty(deque)){
-        // TODO empty edge case
-    }
+    assert(!deque_is_empty(deque)); // it is not allowed to be empty
     Node* to_remove = deque->head;
     deque->head = deque->head->next;
     if(deque->head == NULL){
@@ -48,9 +47,7 @@ Coord deque_pop_front(Deque* deque){
 }
 
 Coord deque_pop_back(Deque* deque){
-    if(deque_is_empty(deque)){
-        // TODO empty edge case
-    }
+    assert(!deque_is_empty(deque)); // it is not allowed to be empty
     Node* to_remove = deque->tail;
     deque->tail = deque->tail->prev;
     if(deque->tail == NULL){
