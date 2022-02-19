@@ -11,52 +11,53 @@ Deque new_deque(){
 }
 
 void deque_push_front(Deque* deque, Coord val){
-    Node* new = new_node_ptr(val, deque->head, NULL);
-    if(deque_is_empty(deque)){
-        deque->head = new;
-        deque->tail = new;
+    Node* new = new_node_ptr(val, deque->head, NULL); // create new node before head
+    if(deque_is_empty(deque)){ // if no items are in the deque
+        deque->head = new; // set head
+        deque->tail = new; // set tail
     }else{
-        deque->head->prev = new;
-        deque->head = deque->head->prev;
+        deque->head->prev = new; // put before head
+        deque->head = deque->head->prev; // point to new head
     }
 }
 
 void deque_push_back(Deque* deque, Coord val){
     Node* new = new_node_ptr(val, NULL, deque->tail);
-    if(deque_is_empty(deque)){
-        deque->head = new;
-        deque->tail = new;
+    if(deque_is_empty(deque)){ // if no items are in the deuqe
+        deque->head = new; // set head
+        deque->tail = new; // set tail
     }else{
-        deque->tail->next = new;
-        deque->tail = deque->tail->next;
+        deque->tail->next = new; // put after tail
+        deque->tail = deque->tail->next; // point to new tail
     }
 }
 
 Coord deque_pop_front(Deque* deque){
     assert(!deque_is_empty(deque)); // it is not allowed to be empty
-    Node* to_remove = deque->head;
-    deque->head = deque->head->next;
-    if(deque->head == NULL){
-        deque->tail = NULL;
-    } else {
-        deque->head->prev = NULL;
+    Node* to_remove = deque->head; // save head to remove
+    deque->head = deque->head->next; // move head one to the right
+    if(deque->head == NULL){ // if the list is empty
+        deque->tail = NULL; // the tail shouldn't point to anything
+    } else { // list not empty
+        deque->head->prev = NULL; // there shouldn't be anything before head
     }
-    Coord result = to_remove->val;
-    free(to_remove);
+    Coord result = to_remove->val; // get value to return
+    free(to_remove); // delete old head
     return result;
 }
 
 Coord deque_pop_back(Deque* deque){
     assert(!deque_is_empty(deque)); // it is not allowed to be empty
-    Node* to_remove = deque->tail;
-    deque->tail = deque->tail->prev;
-    if(deque->tail == NULL){
-        deque->head = NULL;
-    }else{
-        deque->tail->next = NULL;
+    Node* to_remove = deque->tail; // save tail to remove
+    deque->tail = deque->tail->prev; // move tail one back
+    if(deque->tail == NULL){ // if the tail moved back to nothing
+        // list is empty
+        deque->head = NULL; // head shouldn't point to anything
+    }else{ // list isn't empty
+        deque->tail->next = NULL; // nothing should be after tail
     }
-    Coord result = to_remove->val;
-    free(to_remove);
+    Coord result = to_remove->val; // get value to return
+    free(to_remove); // delete old tail
     return result;
 }
 
@@ -87,12 +88,12 @@ void deque_print(Deque* deque){
 }
 
 bool deque_contains(Deque* deque, Coord coord){
-    Node* current = deque-> head;
-    while(current != NULL){
-        if(coord_equals(current->val, coord)){
-            return true;
+    Node* current = deque->head; // start at head
+    while(current != NULL){ // while current exists
+        if(coord_equals(current->val, coord)){ // if the values are equal
+            return true; // exit with true
         }
-        current = current-> next;
+        current = current-> next; // increment through list
     }
     return false;
 }
