@@ -12,8 +12,6 @@ typedef enum{
     RIGHT
 } Direction;
 
-#define DIRECTION_BUFFER_SIZE 4
-
 static Deque snake;
 static int length_to_add;
 static bool running;
