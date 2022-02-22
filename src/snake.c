@@ -125,7 +125,7 @@ static void draw(){
     }
 }
 
-static void update(){
+static void update(bool loopable_walls){
     Coord new_head = new_coord(snake.head->val.x, snake.head->val.y);
     switch(current_direction){
         case UP:
@@ -141,13 +141,26 @@ static void update(){
             new_head.x += 1;
             break;
     }
-    if(
-        new_head.x <= 0 ||
+    bool out_of_bounds = new_head.x <= 0 ||
         new_head.y <= 0 ||
         new_head.x > board_size.x ||
-        new_head.y > board_size.y ||
-        deque_contains(&snake, new_head)
-    ){
+        new_head.y > board_size.y;
+    if(loopable_walls && out_of_bounds){
+        if(new_head.x <= 0){
+            new_head.x = board_size.x;
+        }
+        if(new_head.y <= 0){
+            new_head.y = board_size.y;
+        }
+        if(new_head.x > board_size.x){
+            new_head.x = 1;
+        }
+        if(new_head.y > board_size.y){
+            new_head.y = 1;
+        }
+        out_of_bounds = false;
+    }
+    if(out_of_bounds || deque_contains(&snake, new_head)){
         running = false;
         return;
     }
@@ -165,7 +178,7 @@ static void update(){
     }
 }
 
-int start(){
+int start(bool loopable_walls){
     int max_x, max_y;
     getmaxyx(stdscr, max_y, max_x);
     board_size = new_coord((max_x - 3) / 2, max_y - 3);
@@ -182,7 +195,7 @@ int start(){
     while(running){
         kbin();
         if(!paused){
-            update();
+            update(loopable_walls);
             draw();
             refresh();
         }
