@@ -148,15 +148,13 @@ static void update(bool loopable_walls){
     if(loopable_walls && out_of_bounds){
         if(new_head.x <= 0){
             new_head.x = board_size.x;
-        }
-        if(new_head.y <= 0){
-            new_head.y = board_size.y;
-        }
-        if(new_head.x > board_size.x){
+        }else if(new_head.x > board_size.x){
             new_head.x = 1;
         }
         if(new_head.y > board_size.y){
             new_head.y = 1;
+        }else if(new_head.y <= 0){
+            new_head.y = board_size.y;
         }
         out_of_bounds = false;
     }
