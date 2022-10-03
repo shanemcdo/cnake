@@ -20,6 +20,8 @@ cnake - a snake game written in c
 
 - pkg-config
     - Get compile flags for makefile
+    - Linux `sudo apt install pkg-config`
+    - Mac `brew install pkg-config`
 - ncurses
     - Hide cursor
     - Show cursor
@@ -27,3 +29,5 @@ cnake - a snake game written in c
     - Print to the screen
     - Clear the screen
     - Restore the screen
+    - Linux `sudo apt install libncurses5-dev`
+    - Mac `brew install ncurses`
