@@ -19,6 +19,11 @@ cnake - a snake game written in c
 ## Requirements
 
 - pkg-config
-    - Used in the makefile
+    - Get compile flags for makefile
 - ncurses
-    - Use fron drawing screen
+    - Hide cursor
+    - Show cursor
+    - Move cursor
+    - Print to the screen
+    - Clear the screen
+    - Restore the screen
