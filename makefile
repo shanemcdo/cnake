@@ -13,7 +13,8 @@ ifeq ("$(wildcard src/*$(EXTENSION))", "")# if there are no c files
 	CFLAGS+=-std=c++20# c++ flags
 endif
 INCLUDES=$(wildcard include/*)# get all include files
-OBJECTS=$(patsubst src/%$(EXTENSION),bin/%.o,$(wildcard src/*$(EXTENSION)))# in bin/%.o format, all of the objects to be compiled
+SRCS=$(wildcard src/*$(EXTENSION))
+OBJECTS=$(patsubst src/%$(EXTENSION),bin/%.o,$(SRCS))# in bin/%.o format, all of the objects to be compiled
 DBG_OBJECTS=$(patsubst %,%.debug,$(OBJECTS))
 
 all: $(TARGET)
@@ -25,7 +26,7 @@ bin/%.o: src/%$(EXTENSION) $(INCLUDES) bin# create object file for %
 	$(CC) $< $(CFLAGS) -c -o $@
 
 clean:# remove contents of bin
-	rm -rf bin
+	rm -rf bin docs
 
 bin:# create folder bin
 	mkdir bin
@@ -35,6 +36,9 @@ release: clean
 
 test: all# compile everything then run executible
 	$(TARGET)
+
+docs: config $(INCUDES) $(SRCS)
+	doxygen config
 
 # DEBUGGING RULES
 debug: $(DBG_TARGET)# run make with debug flags and call lldb
