@@ -37,8 +37,8 @@ release: clean
 test: all# compile everything then run executible
 	$(TARGET)
 
-docs: config $(INCUDES) $(SRCS)
-	doxygen config
+docs: Doxyfile $(INCUDES) $(SRCS)
+	doxygen 
 
 # DEBUGGING RULES
 debug: $(DBG_TARGET)# run make with debug flags and call lldb
